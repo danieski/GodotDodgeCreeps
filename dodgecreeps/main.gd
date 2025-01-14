@@ -1,24 +1,32 @@
 extends Node
-
+var score =0
 @export var mob_scene: PackedScene
-var score
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	new_game()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
+
 
 
 func game_over():
 	$ScoreTimer.stop()
 	$MobTimer.stop()
+	$HUD.show_game_over()
+	$HUD/GameTimerLabel.hide()
 
 func new_game():
-	score = 0
+	
+	get_tree().call_group("mobs", "queue_free")
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
+	$HUD.update_score(0)
+	$"HUD/Game Timer".start(10)
+	$HUD.show_message("Get Ready")	
+
 
 func _on_mob_timer_timeout():
 	# Create a new instance of the Mob scene.
@@ -47,7 +55,7 @@ func _on_mob_timer_timeout():
 
 
 func _on_score_timer_timeout() -> void:
-	pass # Replace with function body.
+	pass
 
 
 func _on_start_timer_timeout() -> void:

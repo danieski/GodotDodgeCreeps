@@ -1,0 +1,98 @@
+[gd_scene load_steps=5 format=3 uid="uid://irqmg1mk2pp2"]
+
+[ext_resource type="Script" path="res://hud.gd" id="1_oyxj0"]
+[ext_resource type="FontFile" uid="uid://b5okhnvry5opo" path="res://fonts/Xolonium-Regular.ttf" id="2_r8lfw"]
+[ext_resource type="FontFile" uid="uid://dqg2ah1kkvqjw" path="res://fonts/star_jedi/starjedi/Starjedi.ttf" id="3_g7vog"]
+
+[sub_resource type="Theme" id="Theme_8xhiu"]
+/colors/Green = Color(2.06962e-06, 0.813116, 0, 1)
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_oyxj0")
+
+[node name="Game Timer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[node name="ScoreLabel" type="Label" parent="."]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -91.0
+offset_bottom = 78.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("2_r8lfw")
+theme_override_font_sizes/font_size = 64
+text = "0
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameTimerLabel" type="Label" parent="."]
+visible = false
+offset_right = 91.0
+offset_bottom = 78.0
+theme_override_fonts/font = ExtResource("2_r8lfw")
+theme_override_font_sizes/font_size = 64
+text = "0
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimeAdded" type="Label" parent="."]
+visible = false
+offset_top = 56.0
+offset_right = 91.0
+offset_bottom = 134.0
+theme = SubResource("Theme_8xhiu")
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_fonts/font = ExtResource("2_r8lfw")
+theme_override_font_sizes/font_size = 64
+text = "0
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Message" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.0
+offset_top = -104.5
+offset_right = 240.0
+offset_bottom = 104.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_g7vog")
+theme_override_font_sizes/font_size = 64
+text = "Shoot
+ Asteroids"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="StartButton" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 220.0
+offset_right = 150.0
+offset_bottom = 331.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_g7vog")
+theme_override_font_sizes/font_size = 64
+text = "Start"
+
+[node name="MessageTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="Game Timer" to="." method="_on_game_timer_timeout"]
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]

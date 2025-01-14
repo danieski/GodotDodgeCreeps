@@ -1,11 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dhvdhk7gqatoi"]
+[gd_scene load_steps=7 format=3 uid="uid://dhvdhk7gqatoi"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_vo1f4"]
-[ext_resource type="Texture2D" uid="uid://bkoir8setavyn" path="res://art/playerGrey_up2.png" id="2_2c48j"]
-[ext_resource type="Texture2D" uid="uid://bdtq4lc74n64a" path="res://art/playerGrey_up1.png" id="3_o51g2"]
+[ext_resource type="Texture2D" uid="uid://bpc0a7fq4crwb" path="res://art/aim2.png" id="3_h6nlm"]
 [ext_resource type="Texture2D" uid="uid://qyeau7dtoi8v" path="res://art/aim3.png" id="4_85p4e"]
-[ext_resource type="Texture2D" uid="uid://bpllilbywmkb" path="res://art/playerGrey_walk1.png" id="4_yxkrv"]
-[ext_resource type="Texture2D" uid="uid://0cci84774imr" path="res://art/playerGrey_walk2.png" id="5_tpaqt"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0bdqk"]
 load_path = "res://.godot/imported/aim2.png-7f8140caa19a77acb2fc90bcc6e9e3be.ctex"
@@ -13,12 +10,6 @@ load_path = "res://.godot/imported/aim2.png-7f8140caa19a77acb2fc90bcc6e9e3be.cte
 [sub_resource type="SpriteFrames" id="SpriteFrames_3bttd"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_2c48j")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_o51g2")
-}, {
 "duration": 1.0,
 "texture": ExtResource("4_85p4e")
 }, {
@@ -31,30 +22,30 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_yxkrv")
+"texture": ExtResource("4_85p4e")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_tpaqt")
+"texture": ExtResource("3_h6nlm")
 }],
 "loop": true,
 "name": &"walk",
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_otf7y"]
-radius = 26.0
-height = 68.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dymj3"]
 
 [node name="Player" type="Area2D"]
+position = Vector2(227, 387)
 script = ExtResource("1_vo1f4")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
+position = Vector2(1, -3.50003)
+scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_3bttd")
-animation = &"up"
+animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_otf7y")
+shape = SubResource("RectangleShape2D_dymj3")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
