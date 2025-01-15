@@ -1,6 +1,7 @@
 extends Area2D
 
 @export var speed = 400 # How fast the player will move (pixels/sec).
+@export var shoot_scene: PackedScene
 var screen_size # Size of the game window.
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -14,6 +15,10 @@ func _process(delta):
 		velocity.y += 1
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
+	if Input.is_action_just_pressed("shoot"):
+		print("Shoot")
+		var shoot = shoot_scene.instantiate()
+		add_child(shoot)
 
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
@@ -37,11 +42,12 @@ signal hit
 
 func _on_body_entered(body: Node2D) -> void:
 	#hide() # Player disappears after being hit.
+	
 	hit.emit()
 	body.hide()
+	#$Mob.division()
 	
-	# Must be deferred as we can't change physics properties on a physics callback.
-	#$CollisionShape2D.set_deferred("disabled", true)
+
 	
 func start(pos):
 	position = pos

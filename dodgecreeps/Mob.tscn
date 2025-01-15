@@ -1,7 +1,8 @@
-[gd_scene load_steps=52 format=3 uid="uid://bcw7h8q4beem5"]
+[gd_scene load_steps=53 format=3 uid="uid://bcw7h8q4beem5"]
 
 [ext_resource type="Script" path="res://mob.gd" id="1_adgt5"]
 [ext_resource type="Texture2D" uid="uid://coe0ut3xrxb8x" path="res://art/Asteroid/asteroid1-split/imageonline/00.png" id="2_uhkfi"]
+[ext_resource type="PackedScene" uid="uid://kwyj5dj02m76" path="res://mob_hijo.tscn" id="2_w5p2y"]
 [ext_resource type="Texture2D" uid="uid://caxtmo7k7sgt5" path="res://art/Asteroid/asteroid1-split/imageonline/01.png" id="3_h78sx"]
 [ext_resource type="Texture2D" uid="uid://b5lo47vyggkkj" path="res://art/Asteroid/asteroid1-split/imageonline/02.png" id="4_723wv"]
 [ext_resource type="Texture2D" uid="uid://c0mm3bp1bcnki" path="res://art/Asteroid/asteroid1-split/imageonline/03.png" id="5_f872t"]
@@ -209,6 +210,7 @@ animations = [{
 collision_mask = 0
 gravity_scale = 0.0
 script = ExtResource("1_adgt5")
+mob_hijo_scene = ExtResource("2_w5p2y")
 metadata/_edit_group_ = true
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

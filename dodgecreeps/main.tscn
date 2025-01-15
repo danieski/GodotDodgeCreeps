@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dcadhhw5jb57e"]
+[gd_scene load_steps=7 format=3 uid="uid://dcadhhw5jb57e"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_2yka2"]
 [ext_resource type="PackedScene" uid="uid://bcw7h8q4beem5" path="res://Mob.tscn" id="2_6d0hk"]
+[ext_resource type="PackedScene" uid="uid://by81b6fbn4yhn" path="res://bala.tscn" id="2_el6ml"]
 [ext_resource type="PackedScene" uid="uid://dhvdhk7gqatoi" path="res://Player.tscn" id="3_n8xo8"]
 [ext_resource type="PackedScene" uid="uid://irqmg1mk2pp2" path="res://HUD.tscn" id="3_xs5tk"]
 
@@ -18,6 +19,7 @@ mob_scene = ExtResource("2_6d0hk")
 [node name="HUD" parent="." instance=ExtResource("3_xs5tk")]
 
 [node name="Player" parent="." instance=ExtResource("3_n8xo8")]
+shoot_scene = ExtResource("2_el6ml")
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5
