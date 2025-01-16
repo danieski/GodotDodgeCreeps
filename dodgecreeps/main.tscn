@@ -1,16 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://dcadhhw5jb57e"]
+[gd_scene load_steps=8 format=3 uid="uid://dcadhhw5jb57e"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_2yka2"]
 [ext_resource type="PackedScene" uid="uid://bcw7h8q4beem5" path="res://Mob.tscn" id="2_6d0hk"]
-[ext_resource type="PackedScene" uid="uid://by81b6fbn4yhn" path="res://bala.tscn" id="2_el6ml"]
 [ext_resource type="PackedScene" uid="uid://dhvdhk7gqatoi" path="res://Player.tscn" id="3_n8xo8"]
 [ext_resource type="PackedScene" uid="uid://irqmg1mk2pp2" path="res://HUD.tscn" id="3_xs5tk"]
+[ext_resource type="Texture2D" uid="uid://dg3ltm5jnaooo" path="res://art/bullet.png" id="6_ph1xp"]
 
 [sub_resource type="Curve2D" id="Curve2D_83skg"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 480, 0, 0, 0, 0, 0, 480, 720, 0, 0, 0, 0, 0, 720, 0, 0, 0, 0, 0, 0)
 }
 point_count = 5
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hnmir"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_2yka2")
@@ -19,7 +21,6 @@ mob_scene = ExtResource("2_6d0hk")
 [node name="HUD" parent="." instance=ExtResource("3_xs5tk")]
 
 [node name="Player" parent="." instance=ExtResource("3_n8xo8")]
-shoot_scene = ExtResource("2_el6ml")
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -28,7 +29,7 @@ autostart = true
 [node name="ScoreTimer" type="Timer" parent="."]
 
 [node name="StartTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 5.0
 one_shot = true
 
 [node name="StartPosition" type="Marker2D" parent="."]
@@ -39,8 +40,23 @@ curve = SubResource("Curve2D_83skg")
 
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-14.6037, -13.3631)
+rotation = 2.41728
+scale = Vector2(2.12729, 2.30883)
+texture = ExtResource("6_ph1xp")
+
+[node name="Area2D" type="Area2D" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+shape = SubResource("CircleShape2D_hnmir")
+
+[node name="Reload" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="hit" from="." to="HUD" method="_on_main_hit"]
 [connection signal="start_game" from="HUD" to="." method="new_game"]
-[connection signal="hit" from="Player" to="HUD" method="_on_player_hit"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="body_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_body_entered"]

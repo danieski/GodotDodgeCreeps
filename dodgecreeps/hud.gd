@@ -50,7 +50,15 @@ func _on_message_timer_timeout() -> void:
 	$Message.hide()
 
 
-func _on_player_hit() -> void:
+
+
+
+
+func _on_game_timer_timeout() -> void:
+	show_game_over()
+
+
+func _on_main_hit() -> void:
 	scoreHud += 1
 	scoreAux += 1
 	$TimeAdded.hide()
@@ -61,8 +69,4 @@ func _on_player_hit() -> void:
 
 		scoreAux = 0
 		
-	update_score(scoreHud)
-
-
-func _on_game_timer_timeout() -> void:
-	show_game_over()
+	update_score(scoreHud) 

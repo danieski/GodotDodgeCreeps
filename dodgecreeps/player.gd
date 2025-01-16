@@ -1,7 +1,7 @@
 extends Area2D
 
 @export var speed = 400 # How fast the player will move (pixels/sec).
-@export var shoot_scene: PackedScene
+#@export var shoot_scene: PackedScene
 var screen_size # Size of the game window.
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -15,10 +15,16 @@ func _process(delta):
 		velocity.y += 1
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
-	if Input.is_action_just_pressed("shoot"):
-		print("Shoot")
-		var shoot = shoot_scene.instantiate()
-		add_child(shoot)
+	if $"../Reload".time_left == 0:
+		if Input.is_action_just_pressed("shoot"):
+			$"../Reload".start()
+			var tween = get_tree().create_tween()
+			
+			
+			twinaux(tween)
+			tween.set_parallel(false)
+			tween.tween_property($"../Sprite2D","position",Vector2(-8,-8),0)
+			tween.tween_property($"../Sprite2D","scale",Vector2(1,1 ),0)
 
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
@@ -28,6 +34,7 @@ func _process(delta):
 	
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
+
 	if velocity.x != 0:
 		$AnimatedSprite2D.animation = "walk"
 		$AnimatedSprite2D.flip_v = false
@@ -37,17 +44,15 @@ func _process(delta):
 		$AnimatedSprite2D.animation = "up"
 		$AnimatedSprite2D.flip_v = velocity.y > 0
 		
-signal hit
 
 
-func _on_body_entered(body: Node2D) -> void:
-	#hide() # Player disappears after being hit.
-	
-	hit.emit()
-	body.hide()
-	#$Mob.division()
-	
 
+
+
+func twinaux(tween):
+	tween.set_parallel()
+	tween.tween_property($"../Sprite2D","scale",Vector2(0.3,0.3),1)
+	tween.tween_property($"../Sprite2D","position",position,1)
 	
 func start(pos):
 	position = pos

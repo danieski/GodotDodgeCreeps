@@ -1,7 +1,7 @@
 extends Node
 var score =0
 @export var mob_scene: PackedScene
-
+signal hit
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,7 +24,7 @@ func new_game():
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
 	$HUD.update_score(0)
-	$"HUD/Game Timer".start(10)
+	$"HUD/Game Timer".start(20)
 	$HUD.show_message("Get Ready")	
 
 
@@ -60,3 +60,11 @@ func _on_score_timer_timeout() -> void:
 
 func _on_start_timer_timeout() -> void:
 	pass # Replace with function body.
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if $Reload.time_left < 0.2:
+		body.queue_free()
+		hit.emit()
+	
+	#pass # Replace with function body.
