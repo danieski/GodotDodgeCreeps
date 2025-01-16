@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgdh00443sufd"
-path="res://.godot/imported/enemyFlyingAlt_1.png-559f599b16c69b112c1b53f6332e9489.ctex"
+uid="uid://cs4jcwrhjsqa7"
+path="res://.godot/imported/StarsBackground.jpg-c298ac1b980564afb79602169af0962c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/enemyFlyingAlt_1.png"
-dest_files=["res://.godot/imported/enemyFlyingAlt_1.png-559f599b16c69b112c1b53f6332e9489.ctex"]
+source_file="res://fonts/StarsBackground.jpg"
+dest_files=["res://.godot/imported/StarsBackground.jpg-c298ac1b980564afb79602169af0962c.ctex"]
 
 [params]
 

@@ -13,14 +13,16 @@ func show_message(text):
 	$MessageTimer.start()
 	
 func show_game_over():
+	$"../GameOver".play()
+	$"GameTimerLabel".hide()
 	show_message("Game 0ver")
 	await $MessageTimer.timeout
 	$Message.text = "Shoot Asteroids"
 	$Message.show()
 	await get_tree().create_timer(1.0).timeout
 	$StartButton.show()
-	$"GameTimerLabel".hide()
-	
+	$"../Music".stop()
+	$ScoreLabel.hide()
 func update_score(score):
 	scoreHud = score
 	$ScoreLabel.text = str(score)
@@ -41,7 +43,7 @@ func _on_start_button_pressed() -> void:
 	start_game.emit()
 	$ScoreLabel.show()
 	$GameTimerLabel.show()
-	
+	$"../Music".play()
 	#$GameTimerLabel.text = str($"Game Timer".time_left)
 	#$GameTimerLabel.text = str(99)
 

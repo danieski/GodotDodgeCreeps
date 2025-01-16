@@ -1,10 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://dcadhhw5jb57e"]
+[gd_scene load_steps=12 format=3 uid="uid://dcadhhw5jb57e"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_2yka2"]
 [ext_resource type="PackedScene" uid="uid://bcw7h8q4beem5" path="res://Mob.tscn" id="2_6d0hk"]
 [ext_resource type="PackedScene" uid="uid://dhvdhk7gqatoi" path="res://Player.tscn" id="3_n8xo8"]
+[ext_resource type="Texture2D" uid="uid://cs4jcwrhjsqa7" path="res://fonts/StarsBackground.jpg" id="3_s7k1u"]
 [ext_resource type="PackedScene" uid="uid://irqmg1mk2pp2" path="res://HUD.tscn" id="3_xs5tk"]
 [ext_resource type="Texture2D" uid="uid://dg3ltm5jnaooo" path="res://art/bullet.png" id="6_ph1xp"]
+[ext_resource type="AudioStream" uid="uid://sehd0c0tetwl" path="res://art/Kubbi-Digestive_biscuit.mp3" id="7_r4g8f"]
+[ext_resource type="AudioStream" uid="uid://ho1n5x4jkfrr" path="res://art/gameOver.mp3" id="8_utxr3"]
+[ext_resource type="AudioStream" uid="uid://w6khy4r5owqq" path="res://art/shoot.mp3" id="9_yaisd"]
 
 [sub_resource type="Curve2D" id="Curve2D_83skg"]
 _data = {
@@ -13,10 +17,19 @@ _data = {
 point_count = 5
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hnmir"]
+radius = 10.3966
 
 [node name="Main" type="Node"]
 script = ExtResource("1_2yka2")
 mob_scene = ExtResource("2_6d0hk")
+
+[node name="Background" type="TextureRect" parent="."]
+offset_left = -176.0
+offset_top = -288.0
+offset_right = 664.0
+offset_bottom = 920.0
+texture = ExtResource("3_s7k1u")
+expand_mode = 1
 
 [node name="HUD" parent="." instance=ExtResource("3_xs5tk")]
 
@@ -41,9 +54,9 @@ curve = SubResource("Curve2D_83skg")
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-14.6037, -13.3631)
+position = Vector2(-39.9907, -31.8748)
 rotation = 2.41728
-scale = Vector2(2.12729, 2.30883)
+scale = Vector2(4.44782, 4.80817)
 texture = ExtResource("6_ph1xp")
 
 [node name="Area2D" type="Area2D" parent="Sprite2D"]
@@ -53,6 +66,15 @@ shape = SubResource("CircleShape2D_hnmir")
 
 [node name="Reload" type="Timer" parent="."]
 one_shot = true
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_yaisd")
+
+[node name="GameOver" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_utxr3")
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_r4g8f")
 
 [connection signal="hit" from="." to="HUD" method="_on_main_hit"]
 [connection signal="start_game" from="HUD" to="." method="new_game"]

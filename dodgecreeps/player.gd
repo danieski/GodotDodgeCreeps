@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var speed = 400 # How fast the player will move (pixels/sec).
+@export var speed = 600 # How fast the player will move (pixels/sec).
 #@export var shoot_scene: PackedScene
 var screen_size # Size of the game window.
 func _ready():
@@ -17,14 +17,13 @@ func _process(delta):
 		velocity.y -= 1
 	if $"../Reload".time_left == 0:
 		if Input.is_action_just_pressed("shoot"):
+			$"../ShootSound".play()
 			$"../Reload".start()
 			var tween = get_tree().create_tween()
-			
-			
 			twinaux(tween)
 			tween.set_parallel(false)
-			tween.tween_property($"../Sprite2D","position",Vector2(-8,-8),0)
-			tween.tween_property($"../Sprite2D","scale",Vector2(1,1 ),0)
+			tween.tween_property($"../Sprite2D","position",Vector2(-100,-100),0)
+			tween.tween_property($"../Sprite2D","scale",Vector2(10,10),0)
 
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
@@ -35,15 +34,6 @@ func _process(delta):
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
 
-	if velocity.x != 0:
-		$AnimatedSprite2D.animation = "walk"
-		$AnimatedSprite2D.flip_v = false
-		# See the note below about the following boolean assignment.
-		$AnimatedSprite2D.flip_h = velocity.x < 0
-	elif velocity.y != 0:
-		$AnimatedSprite2D.animation = "up"
-		$AnimatedSprite2D.flip_v = velocity.y > 0
-		
 
 
 
@@ -51,7 +41,7 @@ func _process(delta):
 
 func twinaux(tween):
 	tween.set_parallel()
-	tween.tween_property($"../Sprite2D","scale",Vector2(0.3,0.3),1)
+	tween.tween_property($"../Sprite2D","scale",Vector2(0.5,0.5),1)
 	tween.tween_property($"../Sprite2D","position",position,1)
 	
 func start(pos):

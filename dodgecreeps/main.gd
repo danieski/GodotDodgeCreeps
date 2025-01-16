@@ -12,12 +12,9 @@ func _ready() -> void:
 
 
 
-func game_over():
-	$ScoreTimer.stop()
-	$MobTimer.stop()
-	$HUD.show_game_over()
-	$HUD/GameTimerLabel.hide()
 
+	
+	
 func new_game():
 	
 	get_tree().call_group("mobs", "queue_free")
@@ -26,6 +23,7 @@ func new_game():
 	$HUD.update_score(0)
 	$"HUD/Game Timer".start(20)
 	$HUD.show_message("Get Ready")	
+	
 
 
 func _on_mob_timer_timeout():
