@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://dcadhhw5jb57e"]
+[gd_scene load_steps=14 format=3 uid="uid://dcadhhw5jb57e"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_2yka2"]
 [ext_resource type="PackedScene" uid="uid://bcw7h8q4beem5" path="res://Mob.tscn" id="2_6d0hk"]
+[ext_resource type="PackedScene" uid="uid://bmknidg4mhq8p" path="res://enemy_base.tscn" id="3_1ofe6"]
 [ext_resource type="PackedScene" uid="uid://dhvdhk7gqatoi" path="res://Player.tscn" id="3_n8xo8"]
 [ext_resource type="Texture2D" uid="uid://cs4jcwrhjsqa7" path="res://fonts/StarsBackground.jpg" id="3_s7k1u"]
 [ext_resource type="PackedScene" uid="uid://irqmg1mk2pp2" path="res://HUD.tscn" id="3_xs5tk"]
@@ -9,6 +10,8 @@
 [ext_resource type="AudioStream" uid="uid://sehd0c0tetwl" path="res://art/Kubbi-Digestive_biscuit.mp3" id="7_r4g8f"]
 [ext_resource type="AudioStream" uid="uid://ho1n5x4jkfrr" path="res://art/gameOver.mp3" id="8_utxr3"]
 [ext_resource type="AudioStream" uid="uid://w6khy4r5owqq" path="res://art/shoot.mp3" id="9_yaisd"]
+
+[sub_resource type="GDScript" id="GDScript_mg3wc"]
 
 [sub_resource type="Curve2D" id="Curve2D_83skg"]
 _data = {
@@ -22,6 +25,7 @@ radius = 10.3966
 [node name="Main" type="Node"]
 script = ExtResource("1_2yka2")
 mob_scene = ExtResource("2_6d0hk")
+SuperMob_scene = ExtResource("3_1ofe6")
 
 [node name="Background" type="TextureRect" parent="."]
 offset_left = -176.0
@@ -30,6 +34,7 @@ offset_right = 664.0
 offset_bottom = 920.0
 texture = ExtResource("3_s7k1u")
 expand_mode = 1
+script = SubResource("GDScript_mg3wc")
 
 [node name="HUD" parent="." instance=ExtResource("3_xs5tk")]
 
@@ -76,9 +81,14 @@ stream = ExtResource("8_utxr3")
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_r4g8f")
 
+[node name="SuperMobTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
 [connection signal="hit" from="." to="HUD" method="_on_main_hit"]
 [connection signal="start_game" from="HUD" to="." method="new_game"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
 [connection signal="body_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="SuperMobTimer" to="." method="_on_super_mob_timer_timeout"]

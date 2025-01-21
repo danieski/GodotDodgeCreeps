@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="enemy_type" load_steps=2 format=3 uid="uid://ctirdgi4b1o2l"]
+
+[ext_resource type="Script" path="res://enemy_resource.gd" id="1_tkp6e"]
+
+[resource]
+script = ExtResource("1_tkp6e")
+name = "Red"
+speed = 200.0
+type = 0
+health = 0.0

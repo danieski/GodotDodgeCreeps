@@ -1,5 +1,5 @@
 extends RigidBody2D
-@export var mob_hijo_scene: PackedScene
+@export var enemy_stats: Resource
 
 
 func _ready():
@@ -13,8 +13,5 @@ func _process(delta: float) -> void:
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()
 	
-func division():
-	var mob = mob_hijo_scene
-	add_child(mob)
-	add_child(mob)
-	pass
+func getScore():
+	return 2

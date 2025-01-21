@@ -1,19 +1,13 @@
 extends Node
 var score =0
 @export var mob_scene: PackedScene
+@export var SuperMob_scene: PackedScene
 signal hit
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	new_game()
 
-
-
-
-
-
-
-	
 	
 func new_game():
 	
@@ -50,7 +44,7 @@ func _on_mob_timer_timeout():
 
 	# Spawn the mob by adding it to the Main scene.
 	add_child(mob)
-
+	
 
 func _on_score_timer_timeout() -> void:
 	pass
@@ -62,7 +56,15 @@ func _on_start_timer_timeout() -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if $Reload.time_left < 0.2:
+		hit.emit(body.getScore())
 		body.queue_free()
-		hit.emit()
+		
 	
-	#pass # Replace with function body.
+
+
+
+func _on_super_mob_timer_timeout() -> void:
+	
+	var supermob = SuperMob_scene.instantiate()
+	add_child(supermob)
+	
