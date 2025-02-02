@@ -21,16 +21,16 @@ func show_game_over():
 	$Message.show()
 	await get_tree().create_timer(1.0).timeout
 	$StartButton.show()
-	$"../Music".stop()
 	$ScoreLabel.hide()
 	
 func update_score(score):
 	scoreHud = score
 	$ScoreLabel.text = str(score)
 	$TimeAdded.hide()
-	if scoreHud % 10==0:
-		$"Game Timer".time_left+10
-		$TimeAdded.visible = true
+	$"Game Timer".start($"Game Timer".time_left +  5)
+	print($"Game Timer".time_left)
+	
+	$TimeAdded.visible = true
 
 
 func _process(delta: float) -> void:
@@ -43,7 +43,7 @@ func _on_start_button_pressed() -> void:
 	start_game.emit()
 	$ScoreLabel.show()
 	$GameTimerLabel.show()
-	$"../Music".play()
+
 
 
 

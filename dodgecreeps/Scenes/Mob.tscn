@@ -1,6 +1,6 @@
 [gd_scene load_steps=52 format=3 uid="uid://bcw7h8q4beem5"]
 
-[ext_resource type="Script" path="res://mob.gd" id="1_adgt5"]
+[ext_resource type="Script" path="res://Scripts/mob.gd" id="1_adgt5"]
 [ext_resource type="Texture2D" uid="uid://coe0ut3xrxb8x" path="res://art/Asteroid/asteroid1-split/imageonline/00.png" id="2_uhkfi"]
 [ext_resource type="Texture2D" uid="uid://caxtmo7k7sgt5" path="res://art/Asteroid/asteroid1-split/imageonline/01.png" id="3_h78sx"]
 [ext_resource type="Texture2D" uid="uid://b5lo47vyggkkj" path="res://art/Asteroid/asteroid1-split/imageonline/02.png" id="4_723wv"]
@@ -206,7 +206,8 @@ animations = [{
 }]
 
 [node name="Mob" type="RigidBody2D"]
-collision_mask = 0
+collision_layer = 4
+collision_mask = 10
 gravity_scale = 0.0
 script = ExtResource("1_adgt5")
 metadata/_edit_group_ = true
@@ -223,4 +224,5 @@ scale = Vector2(0.445312, 0.551823)
 sprite_frames = SubResource("SpriteFrames_hpwc3")
 animation = &"asteroid"
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

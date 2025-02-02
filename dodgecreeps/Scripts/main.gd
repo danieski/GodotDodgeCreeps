@@ -12,7 +12,6 @@ func _ready() -> void:
 func new_game():
 	
 	get_tree().call_group("mobs", "queue_free")
-	$Player.start($StartPosition.position)
 	$StartTimer.start()
 	$HUD.update_score(0)
 	$"HUD/Game Timer".start(20)
@@ -53,18 +52,10 @@ func _on_score_timer_timeout() -> void:
 func _on_start_timer_timeout() -> void:
 	pass # Replace with function body.
 
-
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if $Reload.time_left < 0.2:
-		hit.emit(body.getScore())
-		body.queue_free()
 		
 	
 
 
 
-func _on_super_mob_timer_timeout() -> void:
-	
-	var supermob = SuperMob_scene.instantiate()
-	add_child(supermob)
+
 	

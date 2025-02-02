@@ -15,3 +15,7 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 	
 func getScore():
 	return 2
+
+
+func _on_body_entered(body: Node) -> void:
+	print("Collision from mob")

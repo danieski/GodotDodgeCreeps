@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://irqmg1mk2pp2"]
 
-[ext_resource type="Script" path="res://hud.gd" id="1_oyxj0"]
+[ext_resource type="Script" path="res://Scripts/hud.gd" id="1_oyxj0"]
 [ext_resource type="FontFile" uid="uid://b5okhnvry5opo" path="res://fonts/Xolonium-Regular.ttf" id="2_r8lfw"]
 [ext_resource type="FontFile" uid="uid://dqg2ah1kkvqjw" path="res://fonts/star_jedi/starjedi/Starjedi.ttf" id="3_g7vog"]
 
