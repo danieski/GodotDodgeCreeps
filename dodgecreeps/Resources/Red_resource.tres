@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="enemy_type" load_steps=2 format=3 uid="uid://def67ho27p87e"]
+
+[ext_resource type="Script" path="res://Scripts/enemy_resource.gd" id="1_km7jy"]
+
+[resource]
+script = ExtResource("1_km7jy")
+name = "Hot_Enemy"
+type = 0
+speed = 300.0
+point = 0.0

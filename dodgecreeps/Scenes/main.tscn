@@ -1,11 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://dcadhhw5jb57e"]
+[gd_scene load_steps=13 format=3 uid="uid://dcadhhw5jb57e"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_2yka2"]
 [ext_resource type="PackedScene" uid="uid://bcw7h8q4beem5" path="res://Scenes/Mob.tscn" id="2_6d0hk"]
 [ext_resource type="Texture2D" uid="uid://cs4jcwrhjsqa7" path="res://fonts/StarsBackground.jpg" id="3_s7k1u"]
 [ext_resource type="PackedScene" uid="uid://irqmg1mk2pp2" path="res://Scenes/HUD.tscn" id="3_xs5tk"]
 [ext_resource type="PackedScene" uid="uid://dhvdhk7gqatoi" path="res://Scenes/Player.tscn" id="4_w5gfv"]
+[ext_resource type="PackedScene" uid="uid://chy7n1p717tpu" path="res://Scenes/enemy_base.tscn" id="8_6rtgw"]
 [ext_resource type="AudioStream" uid="uid://ho1n5x4jkfrr" path="res://art/gameOver.mp3" id="8_utxr3"]
+[ext_resource type="Resource" uid="uid://def67ho27p87e" path="res://Resources/Red_resource.tres" id="9_gcwii"]
+[ext_resource type="Resource" uid="uid://p4pdhdr6i1x6" path="res://Resources/Green_resource.tres" id="9_xdhcp"]
 [ext_resource type="AudioStream" uid="uid://w6khy4r5owqq" path="res://art/shoot.mp3" id="9_yaisd"]
 
 [sub_resource type="Resource" id="Resource_7vngn"]
@@ -62,6 +65,14 @@ stream = ExtResource("8_utxr3")
 [node name="SuperMobTimer" type="Timer" parent="."]
 wait_time = 10.0
 autostart = true
+
+[node name="enemy_base2" parent="." instance=ExtResource("8_6rtgw")]
+position = Vector2(0, 53)
+enemy_stats = ExtResource("9_xdhcp")
+
+[node name="enemy_base" parent="." instance=ExtResource("8_6rtgw")]
+position = Vector2(0, 121)
+enemy_stats = ExtResource("9_gcwii")
 
 [connection signal="hit" from="." to="HUD" method="_on_main_hit"]
 [connection signal="start_game" from="HUD" to="." method="new_game"]

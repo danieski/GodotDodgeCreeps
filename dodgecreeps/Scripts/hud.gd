@@ -27,8 +27,7 @@ func update_score(score):
 	scoreHud = score
 	$ScoreLabel.text = str(score)
 	$TimeAdded.hide()
-	$"Game Timer".start($"Game Timer".time_left +  5)
-	print($"Game Timer".time_left)
+	$"Game Timer".start($"Game Timer".time_left +  1)
 	
 	$TimeAdded.visible = true
 

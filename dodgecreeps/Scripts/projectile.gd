@@ -1,5 +1,5 @@
 extends CharacterBody2D
-@export var SPEED = 100
+@export var SPEED = 500
 var dir : float
 var spawnPos : Vector2
 var spawnRot : float
@@ -15,7 +15,8 @@ func _physics_process(delta):
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	get_tree().current_scene.get_node("HUD")._on_main_hit(5)
+	$CPUParticles2D.emitting=true
 	body.queue_free()
-	queue_free()
+	#queue_free()
 	
 	

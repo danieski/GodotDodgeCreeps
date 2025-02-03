@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://chy7n1p717tpu"]
+
+[ext_resource type="Script" path="res://Scripts/enemy_base.gd" id="1_dpaq5"]
+[ext_resource type="Texture2D" uid="uid://de2p0n3s6gwsx" path="res://art/Asteroid2.png" id="2_xgaxb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_asoic"]
+radius = 30.2655
+
+[node name="enemy_base" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 8
+script = ExtResource("1_dpaq5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, 0.5)
+scale = Vector2(0.54, 0.592233)
+texture = ExtResource("2_xgaxb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_asoic")

@@ -2,7 +2,7 @@ extends Node
 var score =0
 @export var mob_scene: PackedScene
 @export var SuperMob_scene: PackedScene
-signal hit
+signal hit   
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

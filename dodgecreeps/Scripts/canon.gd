@@ -12,10 +12,16 @@ func shoot():
 	instance.spawnRot = global_rotation
 	main.add_child.call_deferred(instance)
 func _physics_process(delta: float) -> void:
+	look_at(get_global_mouse_position())
 	if Input.is_action_pressed("move_left"):
-		rotation -= 10 *delta;
+		position.y -= 100 * delta;
 	if Input.is_action_pressed("move_right"):
-		rotation += 10 *delta;
+		position.y += 100 * delta;
+	if Input.is_action_pressed("move_up"):
+		position.x += 100 * delta;
+	if Input.is_action_pressed("move_down"):
+		position.x -= 100 * delta;
+		
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("shoot"):
 		shoot()
