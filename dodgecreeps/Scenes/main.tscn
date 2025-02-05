@@ -5,14 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://cs4jcwrhjsqa7" path="res://fonts/StarsBackground.jpg" id="3_s7k1u"]
 [ext_resource type="PackedScene" uid="uid://irqmg1mk2pp2" path="res://Scenes/HUD.tscn" id="3_xs5tk"]
 [ext_resource type="PackedScene" uid="uid://dhvdhk7gqatoi" path="res://Scenes/Player.tscn" id="4_w5gfv"]
+[ext_resource type="PackedScene" uid="uid://cubq8us6lbgfl" path="res://Scenes/pickup.tscn" id="5_fdqv3"]
 [ext_resource type="PackedScene" uid="uid://chy7n1p717tpu" path="res://Scenes/enemy_base.tscn" id="8_6rtgw"]
 [ext_resource type="AudioStream" uid="uid://ho1n5x4jkfrr" path="res://art/gameOver.mp3" id="8_utxr3"]
 [ext_resource type="Resource" uid="uid://def67ho27p87e" path="res://Resources/Red_resource.tres" id="9_gcwii"]
 [ext_resource type="Resource" uid="uid://p4pdhdr6i1x6" path="res://Resources/Green_resource.tres" id="9_xdhcp"]
 [ext_resource type="AudioStream" uid="uid://w6khy4r5owqq" path="res://art/shoot.mp3" id="9_yaisd"]
-
-[sub_resource type="Resource" id="Resource_7vngn"]
-metadata/__load_path__ = "res://enemy_base.tscn"
 
 [sub_resource type="Curve2D" id="Curve2D_83skg"]
 _data = {
@@ -23,7 +21,8 @@ point_count = 5
 [node name="Main" type="Node"]
 script = ExtResource("1_2yka2")
 mob_scene = ExtResource("2_6d0hk")
-SuperMob_scene = SubResource("Resource_7vngn")
+SuperMob_scene = ExtResource("9_gcwii")
+coin_scene = ExtResource("5_fdqv3")
 
 [node name="Background" type="TextureRect" parent="."]
 offset_left = -176.0
@@ -56,6 +55,10 @@ curve = SubResource("Curve2D_83skg")
 
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
 
+[node name="EnemyTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_yaisd")
 
@@ -66,17 +69,17 @@ stream = ExtResource("8_utxr3")
 wait_time = 10.0
 autostart = true
 
-[node name="enemy_base2" parent="." instance=ExtResource("8_6rtgw")]
+[node name="enemy_base2" parent="." groups=["enemy"] instance=ExtResource("8_6rtgw")]
 position = Vector2(0, 53)
 enemy_stats = ExtResource("9_xdhcp")
 
-[node name="enemy_base" parent="." instance=ExtResource("8_6rtgw")]
-position = Vector2(0, 121)
+[node name="enemy_base" parent="." groups=["enemy"] instance=ExtResource("8_6rtgw")]
+position = Vector2(644, 129)
 enemy_stats = ExtResource("9_gcwii")
 
-[connection signal="hit" from="." to="HUD" method="_on_main_hit"]
 [connection signal="start_game" from="HUD" to="." method="new_game"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
 [connection signal="timeout" from="SuperMobTimer" to="." method="_on_super_mob_timer_timeout"]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://irqmg1mk2pp2"]
+[gd_scene load_steps=8 format=3 uid="uid://irqmg1mk2pp2"]
 
 [ext_resource type="Script" path="res://Scripts/hud.gd" id="1_oyxj0"]
 [ext_resource type="FontFile" uid="uid://b5okhnvry5opo" path="res://fonts/Xolonium-Regular.ttf" id="2_r8lfw"]
 [ext_resource type="FontFile" uid="uid://dqg2ah1kkvqjw" path="res://fonts/star_jedi/starjedi/Starjedi.ttf" id="3_g7vog"]
+[ext_resource type="Texture2D" uid="uid://bqduq3xna8eqy" path="res://art/Coin/star coin rotate 1E.png" id="4_v8r8w"]
 
 [sub_resource type="Theme" id="Theme_8xhiu"]
 /colors/Green = Color(2.06962e-06, 0.813116, 0, 1)
@@ -21,7 +22,6 @@ wait_time = 10.0
 autostart = true
 
 [node name="ScoreLabel" type="Label" parent="."]
-visible = false
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -99,6 +99,10 @@ text = "Start"
 [node name="MessageTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="coin" type="Sprite2D" parent="."]
+position = Vector2(378, 38)
+texture = ExtResource("4_v8r8w")
 
 [connection signal="timeout" from="Game Timer" to="." method="_on_game_timer_timeout"]
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
