@@ -13,7 +13,6 @@ enum types {
 	GREEN
 }
 func find_apparcence():
-	print("FindAparence")
 	var color : Color
 	match type:
 		0:

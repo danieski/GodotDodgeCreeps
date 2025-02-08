@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://ci4gnwcrfmb7y"]
+
+[ext_resource type="Script" path="res://super_mob.gd" id="1_mky4h"]
+[ext_resource type="Texture2D" uid="uid://de2p0n3s6gwsx" path="res://art/Asteroid2.png" id="2_34pfb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y7vt8"]
+size = Vector2(49, 49)
+
+[sub_resource type="Curve" id="Curve_nu6d4"]
+_data = [Vector2(0.018711, 0.959659), 0.0, 0.0, 0, 0, Vector2(0.995842, 0.0318077), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Super_Mob" type="RigidBody2D"]
+collision_layer = 4
+collision_mask = 8
+gravity_scale = 0.0
+script = ExtResource("1_mky4h")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-3.5, 4.5)
+shape = SubResource("RectangleShape2D_y7vt8")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 60
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+scale_amount_min = 2.0
+scale_amount_max = 8.0
+scale_amount_curve = SubResource("Curve_nu6d4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-4.5, 3.5)
+scale = Vector2(0.53, 0.533981)
+texture = ExtResource("2_34pfb")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

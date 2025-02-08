@@ -1,59 +1,45 @@
 extends CanvasLayer
-var scoreHud=1
 var coinsHud=0
 
-
-# Notifies `Main` node that the button has been pressed
-signal start_game
 func _ready() -> void:
+	
 	GlobalSignal.coin_obtained.connect(update_coins)
 	GlobalSignal.asteroid_destroyed.connect(update_score)	
-func show_message(text):
+	GlobalSignal.game_on_hud.connect(hud_game_on)
+	hud_game_off()
 	
-	$Message.text = text
-	$Message.show()
-	$MessageTimer.start()
+func _process(delta: float) -> void:
+	$GameTimerLabel.text = "Time: " + str(int($"Game Timer".time_left))
 	
-func show_game_over():
-	#$"../GameOver".play()
-	$"GameTimerLabel".hide()
-	show_message("Game 0ver")
-	await $MessageTimer.timeout
-	$Message.text = "Shoot Asteroids"
-	$Message.show()
-	await get_tree().create_timer(1.0).timeout
-	$StartButton.show()
-	$ScoreLabel.hide()
+func hud_game_on():
+	
+	%StartButton.hide()
+	%CoinsLabel.show()
+	%GameTimerLabel.show()
+	%coin.show()
+	%Message.hide()
+	%"Game Timer".start(20)
+func hud_game_off():
+	
+	%StartButton.show()
+	#show_message_game_over()
+	%CoinsLabel.hide()
+	%GameTimerLabel.hide()
+	%coin.hide()
+	GlobalSignal.game_off_hud.emit()
+	coinsHud = 0
+	%CoinsLabel.text = str("0")
 	
 func update_score(score):
-	scoreHud = score
-	$"Game Timer".start($"Game Timer".time_left +  1)
+	$"Game Timer".start($"Game Timer".time_left +  score)
 	
 func update_coins(coin):
 	coinsHud += 1
-	$ScoreLabel.text = str(coinsHud)
-
-func _process(delta: float) -> void:
-	
-	$GameTimerLabel.text = "Time: " + str(int($"Game Timer".time_left))
+	%CoinsLabel.text = str(coinsHud)
 
 func _on_start_button_pressed() -> void:
-	$StartButton.hide()
-	start_game.emit()
-	$ScoreLabel.show()
-	$GameTimerLabel.show()
-
-
-
-
-func _on_message_timer_timeout() -> void:
-	$Message.hide()
-
-
+	GlobalSignal.game_on_hud.emit()
+	hud_game_on()
+	
 func _on_game_timer_timeout() -> void:
-	show_game_over()
-
-
-func _on_main_hit(test) -> void:
-	scoreHud += test
-	update_score(scoreHud) 
+	hud_game_off()

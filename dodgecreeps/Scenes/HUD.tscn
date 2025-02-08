@@ -15,10 +15,12 @@ events = [SubResource("InputEventKey_a8xgl")]
 script = ExtResource("1_oyxj0")
 
 [node name="Game Timer" type="Timer" parent="."]
+unique_name_in_owner = true
 wait_time = 10.0
 autostart = true
 
-[node name="ScoreLabel" type="Label" parent="."]
+[node name="CoinsLabel" type="Label" parent="."]
+unique_name_in_owner = true
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -33,7 +35,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="GameTimerLabel" type="Label" parent="."]
-visible = false
+unique_name_in_owner = true
 offset_right = 91.0
 offset_bottom = 78.0
 theme_override_fonts/font = ExtResource("2_r8lfw")
@@ -44,6 +46,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Message" type="Label" parent="."]
+unique_name_in_owner = true
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -63,6 +66,7 @@ horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="StartButton" type="Button" parent="."]
+unique_name_in_owner = true
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -79,14 +83,10 @@ theme_override_font_sizes/font_size = 64
 shortcut = SubResource("Shortcut_nndth")
 text = "Start"
 
-[node name="MessageTimer" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
-
 [node name="coin" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(378, 38)
 texture = ExtResource("4_v8r8w")
 
 [connection signal="timeout" from="Game Timer" to="." method="_on_game_timer_timeout"]
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
