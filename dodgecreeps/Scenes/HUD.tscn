@@ -1,12 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://irqmg1mk2pp2"]
+[gd_scene load_steps=7 format=3 uid="uid://irqmg1mk2pp2"]
 
 [ext_resource type="Script" path="res://Scripts/hud.gd" id="1_oyxj0"]
 [ext_resource type="FontFile" uid="uid://b5okhnvry5opo" path="res://fonts/Xolonium-Regular.ttf" id="2_r8lfw"]
 [ext_resource type="FontFile" uid="uid://dqg2ah1kkvqjw" path="res://fonts/star_jedi/starjedi/Starjedi.ttf" id="3_g7vog"]
 [ext_resource type="Texture2D" uid="uid://bqduq3xna8eqy" path="res://art/Coin/star coin rotate 1E.png" id="4_v8r8w"]
-
-[sub_resource type="Theme" id="Theme_8xhiu"]
-/colors/Green = Color(2.06962e-06, 0.813116, 0, 1)
 
 [sub_resource type="InputEventKey" id="InputEventKey_a8xgl"]
 keycode = 32
@@ -39,20 +36,6 @@ vertical_alignment = 1
 visible = false
 offset_right = 91.0
 offset_bottom = 78.0
-theme_override_fonts/font = ExtResource("2_r8lfw")
-theme_override_font_sizes/font_size = 64
-text = "0
-"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="TimeAdded" type="Label" parent="."]
-visible = false
-offset_top = 56.0
-offset_right = 91.0
-offset_bottom = 134.0
-theme = SubResource("Theme_8xhiu")
-theme_override_colors/font_color = Color(0, 1, 0, 1)
 theme_override_fonts/font = ExtResource("2_r8lfw")
 theme_override_font_sizes/font_size = 64
 text = "0

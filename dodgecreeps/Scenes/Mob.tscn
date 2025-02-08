@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://bcw7h8q4beem5"]
+[gd_scene load_steps=53 format=3 uid="uid://bcw7h8q4beem5"]
 
 [ext_resource type="Script" path="res://Scripts/mob.gd" id="1_adgt5"]
 [ext_resource type="Texture2D" uid="uid://coe0ut3xrxb8x" path="res://art/Asteroid/asteroid1-split/imageonline/00.png" id="2_uhkfi"]
@@ -49,9 +49,6 @@
 [ext_resource type="Texture2D" uid="uid://df6v72dn8htle" path="res://art/Asteroid/asteroid1-split/imageonline/63.png" id="47_ha0mv"]
 [ext_resource type="Texture2D" uid="uid://bb5hgrfk8u25j" path="res://art/Asteroid/asteroid1-split/imageonline/64.png" id="48_apfb3"]
 [ext_resource type="Texture2D" uid="uid://bdpm8gi16cm4f" path="res://art/Asteroid/asteroid1-split/imageonline/65.png" id="49_dba7g"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_r5tko"]
-size = Vector2(49, 49)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hpwc3"]
 animations = [{
@@ -205,18 +202,22 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r5tko"]
+size = Vector2(49, 49)
+
+[sub_resource type="Curve" id="Curve_17qf3"]
+_data = [Vector2(0.018711, 0.959659), 0.0, 0.0, 0, 0, Vector2(0.995842, 0.0318077), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [node name="Mob" type="RigidBody2D"]
-collision_layer = 4
-collision_mask = 10
+position = Vector2(1, -3)
+collision_layer = 0
+collision_mask = 0
 gravity_scale = 0.0
 script = ExtResource("1_adgt5")
 metadata/_edit_group_ = true
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-3.5, 4.5)
-shape = SubResource("RectangleShape2D_r5tko")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["mobs"]]
 position = Vector2(-3.5, 3.31667)
@@ -224,4 +225,27 @@ scale = Vector2(0.445312, 0.551823)
 sprite_frames = SubResource("SpriteFrames_hpwc3")
 animation = &"asteroid"
 
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-3.5, 4.5)
+shape = SubResource("RectangleShape2D_r5tko")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 60
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+scale_amount_min = 2.0
+scale_amount_max = 8.0
+scale_amount_curve = SubResource("Curve_17qf3")
+
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

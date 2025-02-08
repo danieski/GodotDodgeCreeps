@@ -6,7 +6,6 @@ var speed : float = 100
 @export var pickup_scene : PackedScene
 
 func _ready():
-	#pass
 	set_modulate(enemy_stats.find_apparcence())
 func _process(delta: float) -> void:
 	velocity.x = enemy_stats.speed
@@ -14,7 +13,9 @@ func _process(delta: float) -> void:
 	if position.x > 1000:
 		_respawn()
 func _respawn():
-	#var pickup = pickup_scene.instantiate()
-	#pickup.position = position
-	#get_parent().add_child(pickup)
 	position = Vector2(-78, 123)
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	GlobalSignal.asteroid_destroyed.emit(5)
+	_respawn()

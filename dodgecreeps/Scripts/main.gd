@@ -1,37 +1,36 @@
 extends Node
 var score =0
 @export var mob_scene: PackedScene
-@export var SuperMob_scene: Resource
 @export var coin_scene: PackedScene
 @onready var _scree_size : Rect2 = get_viewport().get_visible_rect()
-#signal hit   
+
 var _pool : Pool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
 	new_game()
+	GlobalSignal.coin_obtained.connect(_on_collision)
 	_pool = Pool.new()
 	_pool.initialize(coin_scene, 10)
 	_spawn_coin()
 
 func _spawn_coin():
 
-		await get_tree().create_timer(1).timeout
-		
-		var coinSpawned : coin = _pool.get_element() as coin
-		var base_y : float = _scree_size.position.y + _scree_size.size.y*0.3
-		coinSpawned.position.x = randf_range(_scree_size.position.x, _scree_size.position.x + _scree_size.size.x * 0.8)
-		coinSpawned.position.y = randf_range(base_y, base_y + _scree_size.size.y * 0.6)
-		add_child(coinSpawned)
+	await get_tree().create_timer(1).timeout
+	var coinSpawned : coin = _pool.get_element() as coin
+	var base_y : float = _scree_size.position.y + _scree_size.size.y*0.3
+	coinSpawned.position.x = randf_range(_scree_size.position.x, _scree_size.position.x + _scree_size.size.x * 0.8)
+	coinSpawned.position.y = randf_range(base_y, base_y + _scree_size.size.y * 0.6)
+	add_child(coinSpawned)
+
 
 func _on_collision(coinSpawned : coin):
 	
-	_despawn(coinSpawned)
+	_pool.return_element(coinSpawned)
 	remove_child(coinSpawned)
 	_spawn_coin()
-	
-func _despawn(coinSpawned : coin) -> void:
-	_pool.return_element(coinSpawned)
+
 	
 func new_game():
 	
@@ -44,6 +43,7 @@ func new_game():
 
 
 func _on_mob_timer_timeout():
+	
 	# Create a new instance of the Mob scene.
 	var mob = mob_scene.instantiate()
 
@@ -67,9 +67,3 @@ func _on_mob_timer_timeout():
 
 	# Spawn the mob by adding it to the Main scene.
 	add_child(mob)
-
-
-func _on_enemy_timer_timeout() -> void:
-	#wadd_child(SuperMob_scene.instantate())
-	
-	pass # Replace with function body.

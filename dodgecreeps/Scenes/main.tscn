@@ -21,7 +21,6 @@ point_count = 5
 [node name="Main" type="Node"]
 script = ExtResource("1_2yka2")
 mob_scene = ExtResource("2_6d0hk")
-SuperMob_scene = ExtResource("9_gcwii")
 coin_scene = ExtResource("5_fdqv3")
 
 [node name="Background" type="TextureRect" parent="."]
@@ -34,6 +33,7 @@ expand_mode = 1
 
 [node name="Player" parent="." instance=ExtResource("4_w5gfv")]
 position = Vector2(242, 451)
+rotation = 3.14159
 
 [node name="HUD" parent="." instance=ExtResource("3_xs5tk")]
 

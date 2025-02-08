@@ -1,3 +1,3 @@
 extends Node
-signal coin_score_update
-signal bullet_exit_screen(bulletSpawnes : Node)
+signal coin_obtained(coin : Node)
+signal asteroid_destroyed()

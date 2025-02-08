@@ -6,7 +6,8 @@ var coinsHud=0
 # Notifies `Main` node that the button has been pressed
 signal start_game
 func _ready() -> void:
-	GlobalSignal.coin_score_update.connect(update_coins)	
+	GlobalSignal.coin_obtained.connect(update_coins)
+	GlobalSignal.asteroid_destroyed.connect(update_score)	
 func show_message(text):
 	
 	$Message.text = text
@@ -26,11 +27,9 @@ func show_game_over():
 	
 func update_score(score):
 	scoreHud = score
-	$TimeAdded.hide()
 	$"Game Timer".start($"Game Timer".time_left +  1)
-	$TimeAdded.visible = true
 	
-func update_coins():
+func update_coins(coin):
 	coinsHud += 1
 	$ScoreLabel.text = str(coinsHud)
 
