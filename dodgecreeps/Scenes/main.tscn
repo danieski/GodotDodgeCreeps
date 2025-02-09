@@ -41,7 +41,7 @@ rotation = 3.14159
 [node name="HUD" parent="." instance=ExtResource("3_xs5tk")]
 
 [node name="MobTimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 2.0
 autostart = true
 
 [node name="ScoreTimer" type="Timer" parent="."]
@@ -72,7 +72,7 @@ stream = ExtResource("8_utxr3")
 wait_time = 3.0
 autostart = true
 
-[node name="enemy_Red" parent="." groups=["enemy"] instance=ExtResource("8_6rtgw")]
+[node name="enemy_Red" parent="." groups=["coin1"] instance=ExtResource("8_6rtgw")]
 position = Vector2(-96, 133)
 enemy_stats = ExtResource("9_gcwii")
 

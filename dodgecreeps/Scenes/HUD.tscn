@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://irqmg1mk2pp2"]
+[gd_scene load_steps=8 format=3 uid="uid://irqmg1mk2pp2"]
 
 [ext_resource type="Script" path="res://Scripts/hud.gd" id="1_oyxj0"]
 [ext_resource type="FontFile" uid="uid://b5okhnvry5opo" path="res://fonts/Xolonium-Regular.ttf" id="2_r8lfw"]
 [ext_resource type="FontFile" uid="uid://dqg2ah1kkvqjw" path="res://fonts/star_jedi/starjedi/Starjedi.ttf" id="3_g7vog"]
 [ext_resource type="Texture2D" uid="uid://bqduq3xna8eqy" path="res://art/Coin/star coin rotate 1E.png" id="4_v8r8w"]
+[ext_resource type="Texture2D" uid="uid://b3r0di6sgr6ur" path="res://art/heart pixel art 64x64.png" id="5_faqbs"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_a8xgl"]
 keycode = 32
@@ -87,6 +88,23 @@ text = "Start"
 unique_name_in_owner = true
 position = Vector2(378, 38)
 texture = ExtResource("4_v8r8w")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="HeartPixelArt64x64" type="Sprite2D" parent="Node2D"]
+position = Vector2(167, 692)
+scale = Vector2(0.671875, 0.625)
+texture = ExtResource("5_faqbs")
+
+[node name="HeartPixelArt64x65" type="Sprite2D" parent="Node2D"]
+position = Vector2(323, 692)
+scale = Vector2(0.671875, 0.625)
+texture = ExtResource("5_faqbs")
+
+[node name="HeartPixelArt64x66" type="Sprite2D" parent="Node2D"]
+position = Vector2(243, 691)
+scale = Vector2(0.671875, 0.625)
+texture = ExtResource("5_faqbs")
 
 [connection signal="timeout" from="Game Timer" to="." method="_on_game_timer_timeout"]
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

@@ -40,3 +40,10 @@ func _physics_process(delta: float) -> void:
 			position.y += 150 * delta;
 		if Input.is_action_just_pressed("shoot"):
 			shoot()
+			$"../ShootSound".play()
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+		if area.is_in_group("coin"):
+			pass
+		else:
+			GlobalSignal.on_player_hit.emit()

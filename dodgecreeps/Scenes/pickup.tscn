@@ -95,7 +95,7 @@ radius = 39.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_7l0br"]
 radius = 41.0122
 
-[node name="Pickup" type="RigidBody2D"]
+[node name="Pickup" type="RigidBody2D" groups=["coin"]]
 position = Vector2(250, 0)
 collision_layer = 16
 collision_mask = 2
@@ -111,11 +111,11 @@ animation = &"Picked"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ctmj3")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["Enemy", "coin"]]
 collision_layer = 16
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["coin"]]
 position = Vector2(1, -1)
 shape = SubResource("CircleShape2D_7l0br")
 
